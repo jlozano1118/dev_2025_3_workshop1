@@ -14,8 +14,18 @@ class Magic:
         Returns:
             int: El n-ésimo número de Fibonacci
         """
-        pass
-    
+        if n < 0:
+            raise ValueError("n debe ser un entero no negativo")
+        elif n == 0:
+            return 0
+        elif n == 1:
+            return 1
+        
+        a, b = 0, 1
+        for _ in range(2, n + 1):
+            a, b = b, a + b
+        return b
+
     def secuencia_fibonacci(self, n):
         """
         Genera los primeros n números de la secuencia de Fibonacci.
@@ -26,7 +36,15 @@ class Magic:
         Returns:
             list: Lista con los primeros n números de Fibonacci
         """
-        pass
+        if n <= 0:
+            return []
+        elif n == 1:
+            return [0]
+
+        fib = [0, 1] 
+        while len(fib) < n:
+            fib.append(fib[-1] + fib[-2]) 
+        return fib
     
     def es_primo(self, n):
         """
@@ -38,7 +56,15 @@ class Magic:
         Returns:
             bool: True si n es primo, False en caso contrario
         """
-        pass
+        cont = 0
+        for i in range(1,n+1):
+            if n % i == 0:
+                cont +=1
+
+        if cont == 2:
+            return True
+        else:
+            return False
     
     def generar_primos(self, n):
         """
@@ -50,7 +76,19 @@ class Magic:
         Returns:
             list: Lista de números primos hasta n
         """
-        pass
+        lista = []
+        cont = 0
+        for i in range(1,n+1):
+            for x in range(1, i+1):
+                if i % x == 0:
+                    cont +=1
+
+            if cont == 2:
+                lista.append(i)
+            
+            cont = 0
+        
+        return lista
     
     def es_numero_perfecto(self, n):
         """
@@ -62,7 +100,17 @@ class Magic:
         Returns:
             bool: True si n es un número perfecto, False en caso contrario
         """
-        pass
+        if n == 0 or n == 1:
+            return False
+        suma = 0
+        for i in range(1,n):
+            if n % i == 0:
+                suma += i
+
+        if suma == n:
+            return True
+        else:
+            return False
     
     def triangulo_pascal(self, filas):
         """
@@ -86,7 +134,11 @@ class Magic:
         Returns:
             int: El factorial de n
         """
-        pass
+        fac = 1
+        for i in range(1,n+1):
+            fac = fac * i
+
+        return fac
     
     def mcd(self, a, b):
         """
@@ -124,7 +176,16 @@ class Magic:
         Returns:
             int: La suma de los dígitos de n
         """
-        pass
+        numeroS = str(n)
+        arreglo = []
+        suma = 0
+        for x in numeroS:
+            arreglo.append(int(x))
+        
+        for x in arreglo:
+            suma += x
+        
+        return suma
     
     def es_numero_armstrong(self, n):
         """
