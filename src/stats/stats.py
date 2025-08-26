@@ -1,3 +1,4 @@
+import math
 class Stats:
     def promedio(self, numeros):
         """
@@ -12,8 +13,18 @@ class Stats:
         Ejemplo:
             promedio([1, 2, 3, 4, 5]) -> 3.0
         """
-        pass
-    
+        if numeros == []:
+            return 0
+        else:
+            suma = 0
+            cantidad = len(numeros)
+            for numero in numeros:
+                suma = suma + numero
+
+            media = suma / cantidad
+            return media
+
+        
     def mediana(self, numeros):
         """
         Encuentra el valor mediano de una lista de números.
@@ -29,7 +40,18 @@ class Stats:
             mediana([1, 2, 3, 4, 5]) -> 3.0
             mediana([1, 2, 3, 4]) -> 2.5
         """
-        pass
+        if numeros == []:
+            return 0
+        else:
+            numeros = sorted(numeros) 
+            n = len(numeros)
+            mid = n // 2
+
+            if n % 2 == 0: 
+                return (numeros[mid - 1] + numeros[mid]) / 2
+            else: 
+                return numeros[mid]
+                    
     
     def moda(self, numeros):
         """
@@ -46,6 +68,10 @@ class Stats:
             moda([1, 2, 2, 3, 3, 3]) -> 3
         """
         pass
+        
+        
+
+
     
     def desviacion_estandar(self, numeros):
         """
@@ -61,8 +87,18 @@ class Stats:
         Ejemplo:
             desviacion_estandar([1, 2, 3, 4, 5]) -> 1.41...
         """
-        pass
-    
+        if numeros == []:
+            return 0
+        else:
+            n = len(numeros)
+            media = sum(numeros) / n
+            suma_cuadrados = 0
+            for x in numeros:
+                suma_cuadrados += (x - media) ** 2
+
+            resultado = suma_cuadrados / n
+            return math.sqrt(resultado)
+        
     def varianza(self, numeros):
         """
         Calcula la varianza de una lista de números.
@@ -77,7 +113,8 @@ class Stats:
         Ejemplo:
             varianza([1, 2, 3, 4, 5]) -> 2.0
         """
-        pass
+        desviacion = self.desviacion_estandar(numeros)
+        return pow(desviacion,2)
     
     def rango(self, numeros):
         """
@@ -92,4 +129,9 @@ class Stats:
         Ejemplo:
             rango([1, 5, 3, 9, 2]) -> 8
         """
-        pass
+        if numeros == []:
+            return 0
+        else:
+            maximo = max(numeros)
+            minimo = min(numeros)
+            return maximo - minimo
