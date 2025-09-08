@@ -67,7 +67,24 @@ class Stats:
         Ejemplo:
             moda([1, 2, 2, 3, 3, 3]) -> 3
         """
-        pass
+        if not numeros: 
+            return None
+
+        frecuencias = {}
+        max_frecuencia = 0
+        moda_valor = numeros[0]
+
+        for num in numeros:
+            if num not in frecuencias:
+                frecuencias[num] = 1
+            else:
+                frecuencias[num] += 1
+
+            if frecuencias[num] > max_frecuencia:
+                max_frecuencia = frecuencias[num]
+                moda_valor = num
+
+        return moda_valor
         
         
 
