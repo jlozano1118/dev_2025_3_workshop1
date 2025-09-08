@@ -122,7 +122,17 @@ class Magic:
         Returns:
             list: Lista de listas que representa el triángulo de Pascal
         """
-        pass
+        triangulo = []
+
+        for i in range(filas):
+            fila = [1] * (i + 1)
+
+            for j in range(1, i):
+                fila[j] = triangulo[i - 1][j - 1] + triangulo[i - 1][j]
+
+            triangulo.append(fila)
+
+        return triangulo
     
     def factorial(self, n):
         """
@@ -151,7 +161,14 @@ class Magic:
         Returns:
             int: El máximo común divisor de a y b
         """
-        pass
+        a = abs(a)
+        b = abs(b)
+
+        while b != 0:
+            resto = a % b
+            a = b          
+            b = resto       
+        return a
     
     def mcm(self, a, b):
         """
@@ -164,7 +181,11 @@ class Magic:
         Returns:
             int: El mínimo común múltiplo de a y b
         """
-        pass
+        if a == 0 or b == 0:
+             return 0  
+
+        mcd_ab = self.mcd(a, b)
+        return abs(a * b) // mcd_ab
     
     def suma_digitos(self, n):
         """
@@ -197,7 +218,14 @@ class Magic:
         Returns:
             bool: True si n es un número de Armstrong, False en caso contrario
         """
-        pass
+        digitos = str(n)
+        num_digitos = len(digitos)
+
+        suma = 0
+        for d in digitos:
+            suma += int(d) ** num_digitos
+
+        return suma == n
     
     def es_cuadrado_magico(self, matriz):
         """
@@ -209,4 +237,34 @@ class Magic:
         Returns:
             bool: True si es un cuadrado mágico, False en caso contrario
         """
-        pass
+        n = len(matriz)
+        for fila in matriz:
+            if len(fila) != n:
+                return False
+
+        suma_objetivo = sum(matriz[0])
+
+        for fila in matriz:
+            if sum(fila) != suma_objetivo:
+                return False
+
+        for col in range(n):
+            suma_columna = 0
+            for fila in range(n):
+                suma_columna += matriz[fila][col]
+            if suma_columna != suma_objetivo:
+                return False
+
+        suma_diag_principal = 0
+        for i in range(n):
+            suma_diag_principal += matriz[i][i]
+        if suma_diag_principal != suma_objetivo:
+            return False
+
+        suma_diag_secundaria = 0
+        for i in range(n):
+            suma_diag_secundaria += matriz[i][n - 1 - i]
+        if suma_diag_secundaria != suma_objetivo:
+            return False
+
+        return True
